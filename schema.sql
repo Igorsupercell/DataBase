@@ -1,5 +1,7 @@
 PRAGMA foreign_keys = ON
 
+
+
 CREATE TABLE Person (
     person_id INTEGER PRIMARY KEY,
     first_name TEXT NOT NULL,
@@ -181,3 +183,29 @@ INSERT INTO Tour_Order (client_person_id, operator_person_id, id_tour, order_dat
 
 INSERT INTO Review (client_person_id, id_hotel, review_text, rating, publication_date) VALUES 
 (3, 1, 'Прекрасный отель, но было холодно', 4, '2026-11-20');
+
+INSERT INTO Person (first_name, second_name, last_name, passport_data, phone, email) VALUES 
+('Доминика', 'Сергеевна', 'Круглая', 'ЛК9048310', '+375339879001', 'domkrug54@gmail.com'),
+('Максим', 'Артурович', 'Залевский', 'ЛК92345610', '+375336571601', 'idurd796@gmail.com');
+
+INSERT INTO Operator (person_id, id_admin, quarterly_sales_sum) VALUES(4,1,1000000);
+INSERT INTO Client (person_id, benefits) VALUES (5,'отсутствует');
+
+INSERT INTO Tour_Order (client_person_id, operator_person_id, id_tour, order_date, discount_applied, total_amount, adults_count, children_count, status) VALUES 
+(5, 4, 2, '2026-11-15', 0, 3500.00, 1, 1, 'Оплачен');
+
+INSERT INTO Review (client_person_id, id_hotel, review_text, rating, publication_date) VALUES 
+(5, 2, 'Всё было превосходно, но немного дороговать', 4.5, '2026-12-10');
+
+SELECT 
+    t.tour_name AS 'Название тура',
+    d.country AS 'Страна',
+    d.city AS 'Город',
+    t.base_price AS 'Базовая цена'
+FROM Tour t
+JOIN Destination d ON t.id_destination = d.id_destination;
+
+SELECT p.last_name AS 'Фамилия ',
+    p.second_name
+FROM Person p
+WHERE p.phone is '+48111222333'
